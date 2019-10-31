@@ -1,26 +1,44 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { Component, useState } from "react";
+import Display from "./components/Display/Display";
+import Dashboard from "./components/Dashboard/Dashboard";
+import { hit, addBall, addStrike, addFoul } from "./helpers";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+import "./App.css";
+
+class App extends Component {
+  constructor() {
+    super();
+    this.state = { balls: 0, strikes: 0 };
+  }
+  handleHit = () => {
+    this.setState(hit(this.state));
+  };
+
+  handleBall = () => {
+    this.setState(addBall(this.state));
+  };
+
+  handleStrike = () => {
+    this.setState(addStrike(this.state));
+  };
+
+  handleFoul = () => {
+    this.setState(addFoul(this.state));
+  };
+  render() {
+    return (
+      <div className="App">
+        <h1>Baseball Management</h1>
+        <Display balls={this.state.balls} strikes={this.state.strikes} />
+        <Dashboard
+          handleFoul={this.handleFoul}
+          handleStrike={this.handleStrike}
+          handleHit={this.handleHit}
+          handleBall={this.handleBall}
+        />
+      </div>
+    );
+  }
 }
 
 export default App;
