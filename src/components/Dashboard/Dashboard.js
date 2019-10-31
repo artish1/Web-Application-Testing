@@ -1,12 +1,12 @@
 import React from "react";
 import "./Dashboard.css";
 
-const Dashboard = ({ handleHit, handleBall }) => {
+const Dashboard = ({ handleHit, handleBall, handleFoul, handleStrike }) => {
   return (
     <div className="dashboard">
-      <button>Strike</button>
+      <button onClick={handleStrike}>Strike</button>
       <button onClick={handleBall}>Ball</button>
-      <button>Foul</button>
+      <button onClick={handleFoul}>Foul</button>
       <button onClick={handleHit}>Hit</button>
     </div>
   );
