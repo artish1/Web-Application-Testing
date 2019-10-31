@@ -1,20 +1,32 @@
-import React, { useState } from "react";
-import "./App.css";
+import React, { Component, useState } from "react";
 import Display from "./components/Display/Display";
 import Dashboard from "./components/Dashboard/Dashboard";
+import { hit, addBall, addStrike, addFoul } from "./helpers";
 
-function App() {
-  const [gameData, setGameData] = useState({
-    balls: 0,
-    strikes: 0,
-    fouls: 0
-  });
-  return (
-    <div className="App">
-      <Display balls={gameData.balls} strikes={gameData.strikes} />
-      <Dashboard />
-    </div>
-  );
+import "./App.css";
+
+class App extends Component {
+  constructor() {
+    super();
+    this.state = { balls: 0, strikes: 0 };
+  }
+  handleHit = () => {
+    this.setState(hit(this.state));
+  };
+
+  handleBall = () => {
+    this.setState(addBall(this.state));
+  };
+
+  render() {
+    return (
+      <div className="App">
+        <h1>Baseball Management</h1>
+        <Display balls={this.state.balls} strikes={this.state.strikes} />
+        <Dashboard handleHit={this.handleHit} handleBall={this.handleBall} />
+      </div>
+    );
+  }
 }
 
 export default App;
